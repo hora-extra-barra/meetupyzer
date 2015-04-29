@@ -1,5 +1,4 @@
 *.pyc
-*.sql
 core/geral/custom_settings.py
 *.sublime-project
 *.sublime-workspace
