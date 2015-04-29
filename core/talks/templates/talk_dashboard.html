@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+    <h3>{{ORGANIZACAO}}</h3>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="btn-group">
+                <a class="btn btn-success">Novo</a>
+                <a class="btn btn-warning">Editar</a>
+                <a class="btn btn-danger">Excluir</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Edição</th>
+                            <th>Data</th>
+                            <th>Hashtag</th>
+                            <th>Vagas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for meetup in meetups %}
+                            <tr>
+                                <th scope="row">{{forloop.counter}}</th>
+                                <td>
+                                    {{meetup.edition}}
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Título</th>
+                                                <th>Palestrante</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for talk in meetup.talk_set.all %}
+                                                <tr>
+                                                    <td>{{forloop.counter}}</td>
+                                                    <td>{{talk.title}}</td>
+                                                    <td>{{talk.announcer.name}}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>                                
+                                </td>
+                                <td>{{meetup.day_of_meet | date:'d/m/Y H:i' }}</td>
+                                <td>{{meetup.hashtag}}</td>
+                                <td>{{meetup.vacancies}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

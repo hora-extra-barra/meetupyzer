@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+    <h3>{{organizacao}}</h3>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="btn-group">
+                <a class="btn btn-success">Novo</a>
+                <a class="btn btn-warning">Editar</a>
+                <a class="btn btn-danger">Excluir</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Foto</th>
+                            <th>Nome</th>
+                            <th>Biografia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for announcer in announcers %}
+                            <tr>
+                                <th scope="row">{{forloop.counter}}</th>
+                                <td><img width="50" height="50" src="/media/{{announcer.photo}}" /></td>
+                                <td>{{announcer.name}}</td>
+                                <td>{{announcer.bio}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

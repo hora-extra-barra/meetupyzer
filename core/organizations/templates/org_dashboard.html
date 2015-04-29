@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+    <div class="jumbotron">
+        <div class="container">
+            <form>
+                <div class="form-group">
+                    <label for="organizacao_nome">Nome</label>
+                    <input type="text" class="form-control" id="organizacao_nome" placeholder="Nome da organização aqui." value="{{ORGANIZACAO.name}}">
+                </div>
+                <div class="form-group">
+                    <label for="organizacao_descricao">Descrição</label>
+                    <textarea class="form-control" id="organizacao_descricao">
+                        {{ORGANIZACAO.description}}
+                    </textarea>
+                </div>
+                <div class="form-group">
+                    <label for="organizacao_logo">Logo</label>
+                    <input type="file" id="organizacao_logo">
+                    <p class="help-block">
+                        <img width="100" height="100" alt="Logo da organização" src="/media/{{ORGANIZACAO.logo}}"  />
+                    </p>
+                </div>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button class="btn btn-danger">Cancelar</button>
+            </form>
+        </div>
+    </div>
+{% endblock content %}
