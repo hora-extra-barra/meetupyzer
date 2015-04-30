@@ -1,0 +1,18 @@
+Django==1.8
+MySQL-python==1.2.5
+Pillow==2.5.1
+argparse==1.2.1
+django-admin-bootstrapped==2.5.0
+django-appconf==0.6
+django-imagekit==3.2.2
+pilkit==1.1.9
+six==1.7.3
+wsgiref==0.1.2
+
+# Caso receba o erro abaixo no MacOS X Mavericks ao instalar o MySQL-python:
+# EnvironmentError: mysql_config not found
+# Adicione /usr/local/mysql/bin ao path e tente novamente:
+# export PATH=$PATH:/usr/local/mysql/bin
+
+# Nunca adicione o ipdb ao requirements.
+# Melhor receber um ImportError do que esquecer um ipdb.set_trace() perdido no codigo
