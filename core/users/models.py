@@ -1,11 +1,43 @@
 # -*- encoding: utf-8 -*-
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser,UserManager
+from django.contrib.auth.models import AbstractBaseUser,UserManager,BaseUserManager
+
+
+class MeetUserManager(BaseUserManager):
+    def create_user(self, email, name, password=None):
+        """
+        Creates and saves a User with the given email, date of
+        birth and password.
+        """
+        if not email:
+            raise ValueError('Users must have an email address')
+
+        user = self.model(
+            email=self.normalize_email(email),
+            name=name,
+        )
+
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, name, password):
+        """
+        Creates and saves a superuser with the given email, date of
+        birth and password.
+        """
+        user = self.create_user(email,
+            password=password,
+            name=name
+        )
+        user.is_admin = True
+        user.save(using=self._db)
+        return user
 
 # Create your models here.
 class User(AbstractBaseUser):
     name = models.CharField(u"nome",max_length=255, blank=False, null=False)
-    email = models.CharField(u"email",max_length=255, blank=False, null=False, unique=True)
+    email = models.EmailField(u"email",max_length=255, unique=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
@@ -14,7 +46,7 @@ class User(AbstractBaseUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name']
 
-    objects = UserManager()
+    objects = MeetUserManager()
 
     class Meta:
         verbose_name = u'Usuário'
