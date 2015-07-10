@@ -14,7 +14,12 @@ urlpatterns = patterns('',
     url(r'^organizacao/', 'organizations.views.dashboard', name='org_dashboard'),
     url(r'^meetups/', 'meetups.views.dashboard', name='meet_dashboard'),
     url(r'^talks/', 'talks.views.dashboard', name='talk_dashboard'),
-    url(r'^palestrantes/', 'announcers.views.dashboard', name='ann_dashboard'),
+    
+    url(r'^palestrantes/$', 'announcers.views.dashboard', name='ann_dashboard'),
+    url(r'^palestrantes/palestrante$', 'announcers.views.ann_form', name='ann_form'),
+    url(r'^palestrantes/(?P<id>[0-9]+)/$', 'announcers.views.ann_form', name='ann_form'),
+    url(r'^palestrantes/add/$', 'announcers.views.ann_add', name='ann_add'),
+    url(r'^palestrantes/excluir/(?P<id>[0-9]+)/$', 'announcers.views.ann_remove', name='ann_remove'),
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^grappelli/', include('grappelli.urls')),

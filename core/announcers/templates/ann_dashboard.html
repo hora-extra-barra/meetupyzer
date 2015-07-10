@@ -5,9 +5,7 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="btn-group">
-                <a class="btn btn-success">Novo</a>
-                <a class="btn btn-warning">Editar</a>
-                <a class="btn btn-danger">Excluir</a>
+                <a class="btn btn-success" href="palestrante">Novo</a>
             </div>
         </div>
     </div>
@@ -21,15 +19,26 @@
                             <th>Foto</th>
                             <th>Nome</th>
                             <th>Biografia</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for announcer in announcers %}
                             <tr>
                                 <th scope="row">{{forloop.counter}}</th>
-                                <td><img width="50" height="50" src="/media/{{announcer.photo}}" /></td>
+                                <td><img width="80" height="80" class="img-circle" src="/media/{{announcer.photo}}" /></td>
                                 <td>{{announcer.name}}</td>
                                 <td>{{announcer.bio}}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default" aria-label="Left Align">
+                                        <a href="{{announcer.id}}" class="glyphicon glyphicon-pencil"></a>
+                                        </button>
+                                        <button type="button" class="btn btn-default" aria-label="Center Align">
+                                        <a href="#" data-url="excluir/{{announcer.id}}" class="glyphicon glyphicon-trash" data-toggle="modal" data-target="#delete-dialog" ></a>
+                                        </button>
+                                    </div>
+                                </td>
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -37,4 +46,22 @@
             </div>
         </div>
     </div>
+    
+    <div id="delete-dialog" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Excluir palestrante</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Você tem certeza que deseja excluir o palestrante?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"  class="btn btn-danger confirm-dialog">Excluir</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 {% endblock content %}
