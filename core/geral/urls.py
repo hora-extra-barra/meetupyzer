@@ -22,7 +22,6 @@ urlpatterns = patterns('',
     url(r'^palestrantes/excluir/(?P<id>[0-9]+)/$', 'announcers.views.ann_remove', name='ann_remove'),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^grappelli/', include('grappelli.urls')),
 )
 
 if settings.DEBUG:
